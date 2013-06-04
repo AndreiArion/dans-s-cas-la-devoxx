@@ -165,7 +165,7 @@ class e9_extracteurs_et_patterns extends HandsOnSuite {
       case _ => "DEFAULT"
     }
 
-    (actual=="string") should be (__)
+    (actual=="string") should be (true)
   }
 
   exercice("You can nest patterns") {
@@ -180,7 +180,7 @@ class e9_extracteurs_et_patterns extends HandsOnSuite {
       case _ => "DEFAULT"
     }
 
-    (actual == "B") should be (__)
+    (actual == "B") should be (true)
   }
 
   exercice("Les listes ont différents patterns") {
@@ -190,21 +190,21 @@ class e9_extracteurs_et_patterns extends HandsOnSuite {
       case _ => "DEFAULT"
     }
 
-    (actual == "ok") should be (__)
+    (actual == "ok") should be (true)
 
     val nextActual = s match {
       case "a"::"b"::Nil => "ok"
       case _ => "DEFAULT"
     }
 
-    (nextActual == "ok") should be (__)
+    (nextActual == "ok") should be (true)
 
     val lastActual = s match {
       case head::tail => head
       case _ => "DEFAULT"
     }
 
-    (lastActual == "a") should be (__)
+    (lastActual == "a") should be (true)
   }
 
   exercice("patterns are evaluated in declaration order") {
@@ -215,6 +215,6 @@ class e9_extracteurs_et_patterns extends HandsOnSuite {
       case _ => "DEFAULT"
     }
 
-    (actual == "ok") should be (__)
+    (actual == "ok") should be (true)
   }
 }
