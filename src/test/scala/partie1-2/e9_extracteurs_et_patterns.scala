@@ -22,9 +22,14 @@ class e9_extracteurs_et_patterns extends HandsOnSuite {
 
     val mailstring = "foo@bar.com"
     val email = new Email(mailstring)
-    val Email(extractedString) = email
+    val Email(extractedString) = email  //??
+    val extracted2 = Email.unapply(email).get
+    anchor(extracted2)
+    anchor(extractedString)
 
-    (extractedString == mailstring) should be(__)
+    (extractedString == mailstring) should be(true)
+        (extracted2 == mailstring) should be(true)
+
   }
 
  /**
@@ -41,8 +46,9 @@ class e9_extracteurs_et_patterns extends HandsOnSuite {
     val email = new Email(mailstring,4)
     val Email(extractedString,extractedRatio) = email
 
-    (extractedRatio == spamRatio) should be(__)
-    (extractedString == mailstring) should be(__)
+
+    (extractedRatio == spamRatio) should be(false)
+    (extractedString == mailstring) should be(true)
   }
 
  /**
@@ -56,7 +62,7 @@ class e9_extracteurs_et_patterns extends HandsOnSuite {
     val email = new Email(mailstring)
     val Email(extractedString) = email
 
-    (extractedString == mailstring) should be(__)
+    (extractedString == mailstring) should be(true)
   }
  /*  
  *   C’est une généralisation du switch, rencontré dans les langages de programmation Java ou C, 
@@ -87,7 +93,7 @@ class e9_extracteurs_et_patterns extends HandsOnSuite {
       case _ => "DEFAULT"
     }
 
-    (actual == "stringB") should be (__)
+    (actual == "stringB") should be (true)
 
     val default = "E" match {
       case "A" => "stringA"
@@ -96,7 +102,7 @@ class e9_extracteurs_et_patterns extends HandsOnSuite {
       case _ => "DEFAULT"
     }
 
-    (default == "DEFAULT") should be (__)
+    (default == "DEFAULT") should be (true)
   }
 
   /**
@@ -117,7 +123,7 @@ class e9_extracteurs_et_patterns extends HandsOnSuite {
       case _ => "DEFAULT"
     }
 
-    (actual=="stringB") should be (__)
+    (actual=="stringB") should be (true)
   }
 
   /**
@@ -125,7 +131,7 @@ class e9_extracteurs_et_patterns extends HandsOnSuite {
   */
   exercice("le pattern matching peut être utilisé avec des extracteurs") {
     case class A(val a:String="A")
-    val a:A = new A(a="b")
+    val a:A = new A("b")
 
     val actual = a match {
       case A("a") => "stringA"
@@ -134,20 +140,20 @@ class e9_extracteurs_et_patterns extends HandsOnSuite {
       case _ => "DEFAULT"
     }
 
-    (actual == "stringB") should be (__)
+    (actual == "stringB") should be (true)
   }
 
   exercice("le pattern matching peut être utilisé avec des extracteurs pour capturer des valeurs") {
     case class A(val a:String, val b:String)
 
-    val a:A = new A(a="string", b="B")
+    val aa:A = new A(a="string", b="B")
 
-    val actual = a match {
+    val actual = aa match {
       case A(a,b) => a+b
       case _ => "DEFAULT"
     }
 
-    (actual=="stringB") should be (__)
+    (actual=="stringB") should be (true)
   }
 
   exercice("Il n’est pas obligatoire de capturer toutes les valeurs") {
