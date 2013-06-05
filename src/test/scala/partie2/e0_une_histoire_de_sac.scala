@@ -24,7 +24,7 @@ class e0_une_histoire_de_sacs /* ou un sac de sac */ extends HandsOnSuite {
      * @param fonction la fonction a appliquer à contenu
      * @return un Sac
      */
-    def map(fonction:Int => Int):Sac = ???
+    def map(fonction:Int => Int):Sac = Sac(fonction(contenu))
 
    /**  Honnêtement, ce n'est pas le concept le plus simple mais il faut se lancer !!! :)
      *
@@ -46,7 +46,7 @@ class e0_une_histoire_de_sacs /* ou un sac de sac */ extends HandsOnSuite {
      *
      */
     def flatMap(fonction:Int => Sac):Sac = {
-      ???
+      fonction(contenu)
     }
   }
 
@@ -57,11 +57,11 @@ class e0_une_histoire_de_sacs /* ou un sac de sac */ extends HandsOnSuite {
 
     monPetitSacDeZero.contenu should be(0)
 
-    monPetitSacDeZero.copy(1) should be(__)
+    monPetitSacDeZero.copy(1) should be(Sac(1))
 
     def incrémenteUnSac(sac:Sac):Sac = sac.copy(sac.contenu + 1)
 
-    incrémenteUnSac(monPetitSacDeZero).contenu should be(__)
+    incrémenteUnSac(monPetitSacDeZero).contenu should be(1)
 
   }
 
@@ -91,7 +91,7 @@ class e0_une_histoire_de_sacs /* ou un sac de sac */ extends HandsOnSuite {
 
     // ici on a rajouté .asInstanceOf[Int]
     // pour des soucis de compilation, il faudra donc remplacer «__.asInstanceOf[Int]»
-    val monPetitSacDeUn  = (for (i <- monPetitSacDeZero) yield (i + __.asInstanceOf[Int]))
+    val monPetitSacDeUn  = (for (i <- monPetitSacDeZero) yield (i + 1))
 
     /*
      * Le compilateur scala traduit cette boucle for par :
@@ -118,7 +118,7 @@ class e0_une_histoire_de_sacs /* ou un sac de sac */ extends HandsOnSuite {
     /**
      * Le compilateur scala traduit cette boucle for par :
      *
-     * monPetitSacDeDeux.flatMap{ p => monGrosSacDeCent.map(g => p *g))
+     * monPetitSacDeDeux.flatMap{ p => monGrosSacDeCent.map(g => p *g)}
      */
 
     l_union_de_mes_sac.contenu should be(200)
