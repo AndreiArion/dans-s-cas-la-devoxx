@@ -44,15 +44,14 @@ class e0_list extends HandsOnSuite {
    */
   case class Cons[A](head:A, tail:List[A]) extends  List[A] {
 
-    def map[B](fonction:A => B):List[B] = ???
-
+    def map[B](fonction:A => B):List[B] = Cons(fonction(head),tail.map(fonction))
 
     /**
      * l'implémentation de flatMap a besoin d'union
      */
-    def flatMap[B](fonction:A => List[B]):List[B] = ???
+    def flatMap[B](fonction:A => List[B]):List[B] = Cons(fonction(head),union(tail.flatMap(fonction)))
 
-    def filter(fonction:A => Boolean):List[A] = ???
+    def filter(fonction:A => Boolean):List[A] = if(fonction(head))Cons(head,tail.filter(fonction)) else tail.filter(fonction)
 
   }
 
