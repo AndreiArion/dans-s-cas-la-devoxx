@@ -38,9 +38,9 @@ class e2_un_sac_algebrique extends HandsOnSuite {
 
   case object SacVide extends Sac {
 
-    override def map(fonction:Int => Int):Sac = Sac(fonction(0))
+    override def map(fonction:Int => Int):Sac = SacVide
 
-    override def flatMap(fonction:Int => Sac):Sac = fonction(0)
+    override def flatMap(fonction:Int => Sac):Sac = SacVide
 
     override def filter(fonction:Int => Boolean):Sac = SacVide
 
