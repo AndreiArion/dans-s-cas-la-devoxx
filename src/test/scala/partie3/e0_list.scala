@@ -49,7 +49,7 @@ class e0_list extends HandsOnSuite {
     /**
      * l'implémentation de flatMap a besoin d'union
      */
-    def flatMap[B](fonction:A => List[B]):List[B] = Cons(fonction(head),union(tail.flatMap(fonction)))
+    def flatMap[B](fonction:A => List[B]):List[B] = fonction(head).union(tail.flatMap(fonction))
 
     def filter(fonction:A => Boolean):List[A] = if(fonction(head))Cons(head,tail.filter(fonction)) else tail.filter(fonction)
 
