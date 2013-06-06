@@ -20,8 +20,8 @@ class e0_list extends HandsOnSuite {
 
     final def union[B >: A](list:List[B]):List[B]= {
       this match {
-        case Cons(head,tail) => Cons(head, ???)
-        case Nil => ???
+        case Cons(head,tail) => Cons(head, tail.union(list))
+        case Nil => list
       }
     }
 
