@@ -61,11 +61,11 @@ class e0_list extends HandsOnSuite {
   case object Nil extends List[Nothing] {
     type A = Nothing
 
-    def map[B](fonction:A => B):List[B]  = ???
+    def map[B](fonction:A => B):List[B]  = Nil
 
     def flatMap[B](fonction:A => List[B]):List[B] = Nil
 
-    def filter(fonction:A => Boolean):List[A] = ???
+    def filter(fonction:A => Boolean):List[A] = Nil
   }
 
   exercice("création") {
