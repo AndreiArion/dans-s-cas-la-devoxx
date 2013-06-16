@@ -50,7 +50,7 @@ class e2_un_peu_plus_algebrique extends HandsOnSuite {
 
     override def valeurOuSinon(replacement:Int):Int = replacement
 
-    def addItems(items: Set[String]): Sac = SacVide(items)
+    def addItems(items: Set[String]): Sac = SacVide(this.items ++ items)
   }
 
   case class SacPlein(valeur:Int , items:Set[String] = Set.empty) extends Sac {

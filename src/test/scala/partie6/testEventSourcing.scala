@@ -35,7 +35,7 @@ package model {
   import bonus_event_sourcing.events._
 
   case class Post(id: PostId, content: PostContent)  {
-      def versions:List[PostContent] = ???
+      def versions:List[PostContent] = List(content)
   }
 
   case class Posts(byId: Map[PostId, Post] = Map.empty, orderedByTimeAdded: Seq[PostId] = Vector.empty) {
