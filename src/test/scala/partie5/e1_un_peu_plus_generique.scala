@@ -6,10 +6,11 @@ class e1_un_peu_plus_generique  extends  HandsOnSuite {
 
   case class Sac[A](valeur:A, items:Set[String]) {
 
-    def map[B](fonction: A => B):Sac[B] = ???
+    def map[B](fonction: A => B):Sac[B] = Sac(fonction(valeur),items)
 
     def flatMap[B](fonction: A => Sac[B]):Sac[B] = {
-      ???
+      val res = fonction(valeur)
+      res.copy(items = (this.items ++ res.items))
     }
 
   }

@@ -14,11 +14,7 @@ class e1_bonus_stream extends HandsOnSuite {
 
     final def union[B >: A](stream: => Stream[B]):Stream[B]= {
       this match {
-<<<<<<< HEAD
-        case cons:Cons[A] => Cons(cons.head, cons.tail)
-=======
         case cons:Cons[A] => Cons(cons.head,cons.union(stream) )
->>>>>>> Streams WIP
         case EmptyStream => stream
       }
     }
@@ -79,27 +75,6 @@ class e1_bonus_stream extends HandsOnSuite {
     def flatMap[B](fonction:A => Stream[B]):Stream[B] = fonction(head).union(tail.flatMap(fonction))
 
     override def filter(fonction:A => Boolean):Stream[A] = if (fonction(head))Cons(head,tail.filter(fonction)) else tail.filter(fonction)
-    override def equals(that:Any):Boolean = {
-      true
-      //WIP
-      /*if(this.isEmpty && that.isEmpty) {
-          true
-        }else{
-          if(this.isEmpty && !that.isEmpty 
-            || !this.isEmpty && that.isEmpty){
-            false
-          }else{
-            this.head == that.head && this.tail.equals(that.tails)
-          }
-
-
-        }*/
-
-
-    }
-
-
->>>>>>> Streams WIP
 
     override def equals(that:Any):Boolean = {
       that match {
@@ -114,6 +89,8 @@ class e1_bonus_stream extends HandsOnSuite {
       effetDeBord(head)
       tail.foreach(effetDeBord)
     }
+    override def toString() = head + " : "+tail.toString()
+
   }
 
   object Cons {
@@ -137,6 +114,7 @@ class e1_bonus_stream extends HandsOnSuite {
     def isEmpty: Boolean = true
 
     def foreach(effetDeBord:A => Unit):Unit = {}
+    override def toString() = "EmptyStream"
   }
 
   exercice("création") {

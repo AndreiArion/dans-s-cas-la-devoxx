@@ -42,28 +42,34 @@ class e2_un_peu_plus_algebrique extends HandsOnSuite {
 
   case class SacVide(items:Set[String] = Set.empty) extends Sac {
 
-    override def map(fonction:Int => Int):Sac = ???
+    override def map(fonction:Int => Int):Sac = SacVide()
 
-    override def flatMap(fonction:Int => Sac):Sac = ???
+    override def flatMap(fonction:Int => Sac):Sac = SacVide()
 
-    override def filter(fonction:Int => Boolean):Sac = ???
+    override def filter(fonction:Int => Boolean):Sac = SacVide()
 
     override def valeurOuSinon(replacement:Int):Int = replacement
 
-    def addItems(items: Set[String]): Sac = ???
+    def addItems(items: Set[String]): Sac = SacVide(items)
   }
 
   case class SacPlein(valeur:Int , items:Set[String] = Set.empty) extends Sac {
 
-    override def map(fonction:Int => Int):Sac = ???
+    override def map(fonction:Int => Int):Sac = SacPlein(fonction(valeur),items)
 
-    override def flatMap(fonction:Int => Sac):Sac = ???
+    override def flatMap(fonction:Int => Sac):Sac = {
+      val res = fonction(valeur)
+      res match{
+        case SacVide(items) => SacVide(items ++ res.items)
+        case SacPlein(valeur,items) => SacPlein(valeur, this.items ++ res.items)
+      }
+    }
 
-    override def filter(fonction:Int => Boolean):Sac = ???
+    override def filter(fonction:Int => Boolean):Sac = if (fonction(valeur))this else SacVide()
 
     override def valeurOuSinon(replacement:Int):Int = valeur
 
-    def addItems(items: Set[String]): Sac = ???
+    def addItems(items: Set[String]): Sac = Sac(valeur,this.items ++ items)
   }
 
 
